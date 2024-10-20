@@ -15,7 +15,7 @@ collection = db["extracted_data"]  # Collection name
 
 # Initialize Groq client
 client = Groq(
-    api_key="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"
+    api_key=os.getenv('GROQ_API_KEY')
 )
 
 upload_folder = "static/upload"
@@ -100,8 +100,8 @@ def generate_comparison_prompt(user_info_str, extracted_info_str):
 
 # Function for running the comparison using Groq
 def compare_product_info(user_info_str, extracted_info_str):
-    groq_api_key = "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"  # Example key
-    model_name = "gemma-7b-it"  # Replace with the correct Groq model name
+    groq_api_key = os.getenv('GROQ_API_KEY')  
+    model_name = "gemma-7b-it" 
 
     # Initialize the ChatGroq instance
     groq = ChatGroq(groq_api_key=groq_api_key, model_name=model_name)
@@ -162,7 +162,7 @@ def final_verdict(user_info, extracted_info, comparison_result):
         return "Disapproved"
     else:
         return "Approved"
-
+##you can provide other user_info_list too 
 user_info_list = [
     
     {
