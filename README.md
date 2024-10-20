@@ -78,11 +78,3 @@ The vision model extracts the following information from product images:
 ## Note
 
 Ensure that the Groq API key and MongoDB connection details are kept secure and not shared publicly.
-
-## Contributors
-
-[Your Name/Team Members]
-
-## License
-
-[Specify your license here]
