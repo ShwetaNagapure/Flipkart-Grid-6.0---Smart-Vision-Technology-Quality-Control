@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Nav Bar Styling */
+        nav {
+            background-color: rgb(4, 66, 129);
+            padding: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-start;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            color: #ffe11b;
+        }
+
+        /* Additional Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+        }
+
+        .sales-table {
+            padding: 30px;
+        }
+
+        table {
+            margin-top: 2%;
+            width: 100%;
+            position:relative;
+            background-color: white;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgb(4, 66, 129);
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        table thead {
+            background-color: #f4f7fc;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body >
+    <!-- Navigation Bar -->
+    <nav style="height: 70px;">
+        <ul style="margin-right:1; margin-top: 10px; margin-right: 2px;">
+            <li ><a  href="#">Flipkart</a></li>
+            <!-- <li><a href="#" style="margin-left: 10px;">Other</a></li> -->
+        </ul>
+    </nav>
+    <section class="stats-cards" style="margin-top: 60px; margin-left: 250px; ">
+       
+
+        
+        <div class="card">
+            <div class="card-content">
+                <h4>Invoice Id</h4>
+                <h4>{{ invoice_id }}</h4>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
+                <h4>Total Product</h4>
+                <h4> {{total_products}}</h4>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-content">
+                <h4>Bill Verified</h4>
+                <h4>
+                    {% if is_verified %}
+                        <span class="verified">Verified ✔️</span>
+                    {% else %}
+                        <span class="not-verified">Not Verified ❌</span>
+                    {% endif %}
+                </h4>
+            </div>
+        </div>
+    </section>     
+     <img src="{{ url_for('static', filename='img/image-removebg-preview (6).png') }}"  alt="" style="position:fixed; margin-left:1350px; margin-top: -185px; width: 300px; height: 250px;">
+    <!-- Table Section -->
+    <section class="sales-table" style="margin-top: 50px;">
+        <table>
+            <thead style="background-color: rgb(4, 66, 129) ;">
+                <tr>
+                    <th style="color: white;">Product Name</th>
+                    <th style="color: white;">Brand Name</th>
+                    <th style="color: white;">Pack Size</th>
+                    <th style="color: white;">Expiry Date</th>
+                    <th style="color: white;">Expiry Validation</th>
+                    <th style="color: white;">Remark</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product['extracted_info']['Product Name'] }}</td>
+                    <td>{{ product['extracted_info']['Brand Name'] }}</td>
+                    <td>{{ product['extracted_info']['Pack Size'] }}</td>
+                    <td>{{ product['extracted_info']['Expiry Date'] }}</td>
+                    <td>{{ product['extracted_info']['Expiry Date (valid/expired)'] }}</td>
+                    <td>{{ product['final_result'] }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
